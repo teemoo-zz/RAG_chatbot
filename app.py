@@ -87,10 +87,10 @@ def user_input(user_question, openai_api_key, model_name):
     st.write("Reply: ", response["output_text"])
 
 def main():
-    st.header("AI Document Chatbot 💬")
+    st.header("Your personal PDF chatbot")
 
     # File upload
-    pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True, key="pdf_uploader")
+    pdf_docs = st.file_uploader("Upload your PDF Files here", accept_multiple_files=True, key="pdf_uploader")
 
     # Submit and Process Button
     if st.button("Submit & Process", key="process_button") and openai_api_key:
