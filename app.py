@@ -30,11 +30,11 @@ st.markdown("""
 """)
 
 # OpenAI API key input
-openai_api_key = st.text_input("Enter your OpenAI API Key:", type="password", key="openai_api_key_input")
+openai_api_key = st.text_input("STEP 1: Enter your OpenAI API Key:", type="password", key="openai_api_key_input")
 
 # Model selection
 model_options = ["gpt-3.5-turbo", "gpt-4-turbo-preview", "gpt-4", "gpt-4-1106-preview"]
-selected_model = st.selectbox("Select OpenAI Model:", model_options)
+selected_model = st.selectbox("STEP 2: Select OpenAI Model:", model_options)
 
 # Initialize session state
 if 'vector_store' not in st.session_state:
@@ -90,9 +90,10 @@ def main():
     st.header("Your personal PDF chatbot")
 
     # File upload
-    pdf_docs = st.file_uploader("Upload your PDF Files here", accept_multiple_files=True, key="pdf_uploader")
+    pdf_docs = st.file_uploader("STEP 3: Upload your PDF Files here", accept_multiple_files=True, key="pdf_uploader")
 
     # Submit and Process Button
+    st.text_input("STEP 4: Click on the button below")
     if st.button("Submit & Process", key="process_button") and openai_api_key:
         with st.spinner("Processing..."):
             raw_text = get_pdf_text(pdf_docs)
@@ -101,7 +102,7 @@ def main():
             st.success("Done")
 
     # Ask a Question section (moved to the end)
-    user_question = st.text_input("Ask a Question from the PDF Files", key="user_question")
+    user_question = st.text_input("STEP 5: Ask a Question from the PDF Files", key="user_question")
 
     if user_question and openai_api_key:
         user_input(user_question, openai_api_key, selected_model)
