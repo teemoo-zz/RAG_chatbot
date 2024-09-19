@@ -90,7 +90,20 @@ def main():
             st.success("Done")
 
     with st.sidebar:
-        st.sidebar.image("document_chatter.jpg", use_column_width=True)
+        st.markdown("""
+        <style>
+        .rounded-image img {
+            border-radius: 10px;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        st.markdown("""
+        <div class="rounded-image">
+        """, unsafe_allow_html=True)
+        st.image("document_chatter.jpg", use_column_width=True)
+        st.markdown("""
+        </div>
+        """, unsafe_allow_html=True)
 
         st.sidebar.markdown("""
         <div style="background-color: white; padding: 10px; border-radius: 10px;">
