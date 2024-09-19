@@ -13,6 +13,22 @@ st.markdown("""
 # Document Chatter
 """)
 
+# Sidebar content
+st.sidebar.image("document_chatter.jpg", use_column_width=True)
+
+st.sidebar.markdown("""
+<div style="background-color: white; padding: 10px; border-radius: 10px;">
+<p style="color: black;">In order to use this document reader application, follow these steps:</p>
+<ol style="color: black;">
+    <li>Insert your OpenAI API key</li>
+    <li>Select your OpenAI model type</li>
+    <li>Upload your PDF document</li>
+    <li>Click on "Submit and Process"</li>
+    <li>Ask your question</li>
+</ol>
+</div>
+""", unsafe_allow_html=True)
+
 # OpenAI API key input
 openai_api_key = st.sidebar.text_input("Enter your OpenAI API Key:", type="password", key="openai_api_key_input")
 
