@@ -13,28 +13,12 @@ st.markdown("""
 # Document Chatter
 """)
 
-# Sidebar content
-st.sidebar.image("document_chatter.jpg", use_column_width=True)
-
-st.sidebar.markdown("""
-<div style="background-color: white; padding: 10px; border-radius: 10px;">
-<p style="color: black;">In order to use this document reader application, follow these steps:</p>
-<ol style="color: black;">
-    <li>Insert your OpenAI API key</li>
-    <li>Select your OpenAI model type</li>
-    <li>Upload your PDF document</li>
-    <li>Click on "Submit and Process"</li>
-    <li>Ask your question</li>
-</ol>
-</div>
-""", unsafe_allow_html=True)
-
 # OpenAI API key input
-openai_api_key = st.sidebar.text_input("Enter your OpenAI API Key:", type="password", key="openai_api_key_input")
+openai_api_key = st.text_input("Enter your OpenAI API Key:", type="password", key="openai_api_key_input")
 
 # Model selection
 model_options = ["gpt-3.5-turbo", "gpt-4-turbo-preview", "gpt-4", "gpt-4-1106-preview"]
-selected_model = st.sidebar.selectbox("Select OpenAI Model:", model_options)
+selected_model = st.selectbox("Select OpenAI Model:", model_options)
 
 # Initialize session state
 if 'vector_store' not in st.session_state:
@@ -94,15 +78,32 @@ def main():
     if user_question and openai_api_key:
         user_input(user_question, openai_api_key, selected_model)
 
+    # File upload
+    pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True, key="pdf_uploader")
+
+    # Submit and Process Button
+    if st.button("Submit & Process", key="process_button") and openai_api_key:
+        with st.spinner("Processing..."):
+            raw_text = get_pdf_text(pdf_docs)
+            text_chunks = get_text_chunks(raw_text)
+            st.session_state.vector_store = create_vector_store(text_chunks, openai_api_key)
+            st.success("Done")
+
     with st.sidebar:
-        st.title("Menu:")
-        pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True, key="pdf_uploader")
-        if st.button("Submit & Process", key="process_button") and openai_api_key:
-            with st.spinner("Processing..."):
-                raw_text = get_pdf_text(pdf_docs)
-                text_chunks = get_text_chunks(raw_text)
-                st.session_state.vector_store = create_vector_store(text_chunks, openai_api_key)
-                st.success("Done")
+        st.sidebar.image("document_chatter.jpg", use_column_width=True)
+
+        st.sidebar.markdown("""
+        <div style="background-color: white; padding: 10px; border-radius: 10px;">
+        <p style="color: black;">In order to use this document reader application, follow these steps:</p>
+        <ol style="color: black;">
+            <li>Insert your OpenAI API key</li>
+            <li>Select your OpenAI model type</li>
+            <li>Upload your PDF document</li>
+            <li>Click on "Submit and Process"</li>
+            <li>Ask your question</li>
+        </ol>
+        </div>
+        """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
