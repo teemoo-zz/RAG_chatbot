@@ -7,6 +7,21 @@ from langchain_community.chat_models import ChatOpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 
+# CSS to style the app, including the dark grey sidebar
+st.markdown("""
+<style>
+    .sidebar .sidebar-content {
+        background-color: #333333;
+    }
+    .sidebar-content {
+        background-color: #333333;
+    }
+    .rounded-image img {
+        border-radius: 10px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 st.set_page_config(page_title="Document Chatter", layout="wide")
 
 st.markdown("""
@@ -90,25 +105,9 @@ def main():
             st.success("Done")
 
     with st.sidebar:
-        st.markdown("""
-        <style>
-        .rounded-image img {
-            border-radius: 10px;
-        }
-        .sidebar .sidebar-content {
-            background-color: #333333;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-        st.markdown("""
-        <div class="rounded-image">
-        """, unsafe_allow_html=True)
         st.image("document_chatter.jpg", use_column_width=True)
-        st.markdown("""
-        </div>
-        """, unsafe_allow_html=True)
 
-        st.sidebar.markdown("""
+        st.markdown("""
         <div style="background-color: white; padding: 10px; border-radius: 10px;">
         <p style="color: black;">In order to use this document reader application, follow these steps:</p>
         <ol style="color: black;">
