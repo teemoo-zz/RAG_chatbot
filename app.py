@@ -10,7 +10,7 @@ from langchain.prompts import PromptTemplate
 # Set page config at the very beginning
 st.set_page_config(page_title="Document Chatter", layout="wide")
 
-# CSS to style the app, including the dark grey sidebar
+# CSS to style the app, including the dark grey sidebar and rounded image
 st.markdown("""
 <style>
     .sidebar .sidebar-content {
@@ -19,7 +19,7 @@ st.markdown("""
     .sidebar-content {
         background-color: #333333;
     }
-    .rounded-image img {
+    .sidebar img {
         border-radius: 10px;
     }
 </style>
@@ -89,11 +89,6 @@ def user_input(user_question, openai_api_key, model_name):
 def main():
     st.header("AI Document Chatbot 💬")
 
-    user_question = st.text_input("Ask a Question from the PDF Files", key="user_question")
-
-    if user_question and openai_api_key:
-        user_input(user_question, openai_api_key, selected_model)
-
     # File upload
     pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True, key="pdf_uploader")
 
@@ -104,6 +99,12 @@ def main():
             text_chunks = get_text_chunks(raw_text)
             st.session_state.vector_store = create_vector_store(text_chunks, openai_api_key)
             st.success("Done")
+
+    # Ask a Question section (moved to the end)
+    user_question = st.text_input("Ask a Question from the PDF Files", key="user_question")
+
+    if user_question and openai_api_key:
+        user_input(user_question, openai_api_key, selected_model)
 
     with st.sidebar:
         st.image("document_chatter.jpg", use_column_width=True)
