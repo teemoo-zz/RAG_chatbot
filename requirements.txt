@@ -1,8 +1,5 @@
 streamlit
-google-generativeai
-langchain
 PyPDF2
-chromadb
+langchain
 faiss-cpu
-langchain_google_genai
-os
+openai
