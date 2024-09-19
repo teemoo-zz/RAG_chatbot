@@ -92,16 +92,21 @@ def main():
     with st.sidebar:
         st.markdown("""
         <style>
-        .rounded-image img {
-            border-radius: 10px;
+        .circular-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .circular-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         </style>
-        """, unsafe_allow_html=True)
-        st.markdown("""
-        <div class="rounded-image">
-        """, unsafe_allow_html=True)
-        st.image("document_chatter.jpg", use_column_width=True)
-        st.markdown("""
+        <div class="circular-image">
+            <img src="document_chatter.jpg" alt="Document Chatter">
         </div>
         """, unsafe_allow_html=True)
 
