@@ -12,17 +12,23 @@ st.set_page_config(page_title="Document Chatter", layout="wide")
 
 # CSS to style the app, including the dark grey sidebar and rounded image
 st.markdown("""
-<style>
-    .sidebar .sidebar-content {
-        background-color: #333333;
-    }
-    .sidebar-content {
-        background-color: #333333;
-    }
-    .sidebar img {
-        border-radius: 10px;
-    }
-</style>
+    <style>
+        [data-testid="stSidebar"] {
+            background-color: #333333;
+        }
+        [data-testid="stSidebar"] > div:first-child {
+            background-color: #333333;
+        }
+        [data-testid="stSidebarNav"] {
+            background-color: #333333;
+        }
+        .css-1d391kg {
+            background-color: #333333;
+        }
+        [data-testid="stSidebar"] img {
+            border-radius: 10px;
+        }
+    </style>
 """, unsafe_allow_html=True)
 
 st.markdown("""
