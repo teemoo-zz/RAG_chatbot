@@ -7,6 +7,9 @@ from langchain_community.chat_models import ChatOpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 
+# Set page config at the very beginning
+st.set_page_config(page_title="Document Chatter", layout="wide")
+
 # CSS to style the app, including the dark grey sidebar
 st.markdown("""
 <style>
@@ -21,8 +24,6 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-
-st.set_page_config(page_title="Document Chatter", layout="wide")
 
 st.markdown("""
 # Document Chatter
