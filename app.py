@@ -93,7 +93,7 @@ def main():
     pdf_docs = st.file_uploader("STEP 3: Upload your PDF Files here", accept_multiple_files=True, key="pdf_uploader")
 
     # Submit and Process Button
-    st.text_input("STEP 4: Click on the button below")
+    st.markdown("STEP 4: Click on the button below")
     if st.button("Submit & Process", key="process_button") and openai_api_key:
         with st.spinner("Processing..."):
             raw_text = get_pdf_text(pdf_docs)
